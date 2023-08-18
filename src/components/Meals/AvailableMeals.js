@@ -42,8 +42,8 @@ const AvailableMeals = () => {
     const fetchMealsData = async () => {
       const response = await fetch(`${firebase_url}/meals.json`);
 
-      if(!response.ok){
-        throw new Error('Something went wrong!');
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
       }
       const responseData = await response.json();
       const loadedMeals = [];
@@ -56,10 +56,9 @@ const AvailableMeals = () => {
           price: responseData[key].price,
         });
       }
-      setMeals(loadedMeals)
-      setIsLoading(false)
+      setMeals(loadedMeals);
+      setIsLoading(false);
     };
-
 
     // try{
     //   fetchMealsData();
@@ -69,29 +68,28 @@ const AvailableMeals = () => {
     //   setHttpError(error.message);
     // }
 
-    fetchMealsData().catch((error) =>{
-      setIsLoading(false)
-       setHttpError(error.message);
-    });
+    fetchMealsData().catch((error) => {
+      
+      setIsLoading(false);
+      
+      setHttpError(error.message);
+  });
     //this is the traditional way of handling error inside a promise
-  
   }, []);
 
-
-
-  if(isLoading){
-    return(
+  if (isLoading) {
+    return (
       <section className={classes.MealsLoading}>
         <p>Loading...</p>
       </section>
-    )
+    );
   }
-  if(httpError){
-    return(
+  if (httpError) {
+    return (
       <section className={classes.MealsError}>
-      <p>{httpError}</p>
-    </section>
-    )
+        <p>{httpError}</p>
+      </section>
+    );
   }
 
   const mealsList = meals.map((meal) => (
